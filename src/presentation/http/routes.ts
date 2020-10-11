@@ -1,9 +1,11 @@
 import { Router } from 'express'
+import { RepositoryController } from './controllers/repository-controller'
 
 export class Routes {
   private readonly _router: Router
 
   constructor (
+    private readonly repositoryController: RepositoryController
   ) {
     this._router = Router()
 
@@ -15,6 +17,7 @@ export class Routes {
   }
 
   repositoryRoutes = () => {
-    this._router.get('/turtle', (_req, res) => res.send('hello turtle :)'))
+    this._router.get('/:owner/:repo/commits', (req, res) => this.repositoryController.getCommits(req, res))
+    this._router.get('/:owner/:repo/commits/details', (req, res) => this.repositoryController.getUserCommits(req, res))
   }
 }
