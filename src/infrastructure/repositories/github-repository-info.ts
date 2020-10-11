@@ -2,9 +2,9 @@ import { Octokit } from '@octokit/rest'
 
 import { DateUtils } from '../../utils/date-utils'
 import { RepositoryNotFoundError } from '../../application/errors/repository-not-found-error'
-import { Commit, RepositoryStats, UsersDateCommit } from '../../application/repositories/repository-info'
+import { Commit, RepositoryInfo, UsersDateCommit } from '../../application/repositories/repository-info'
 
-export class GitHubRepositoryInfo implements RepositoryStats {
+export class GitHubRepositoryInfo implements RepositoryInfo {
   constructor (
     private readonly gitHubClient: Octokit,
     private readonly dateUtils: DateUtils

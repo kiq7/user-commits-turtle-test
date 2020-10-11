@@ -1,5 +1,5 @@
 import { MissingParamError } from '../errors/missing-param-error'
-import { RepositoryStats } from '../repositories/repository-info'
+import { RepositoryInfo } from '../repositories/repository-info'
 
 interface Params {
   owner: string
@@ -15,7 +15,7 @@ interface Response {
 }
 
 export class FetchUserCommits {
-  constructor (private readonly repositoryInfo: RepositoryStats) { }
+  constructor (private readonly repositoryInfo: RepositoryInfo) { }
 
   async execute (params: Params): Promise<Response[]> {
     const requiredParams = ['author', 'date']

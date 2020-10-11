@@ -1,7 +1,7 @@
 import { GitHubRepositoryInfo } from './github-repository-info'
 import { RepositoryNotFoundError } from '../../application/errors/repository-not-found-error'
 
-describe('GitHub Repository Stats', () => {
+describe('GitHub Repository Info', () => {
   const fakeDateUtils: any = {
     formatDateToIso: jest.fn().mockReturnValue('fake-date'),
     formatDateToLocale: jest.fn().mockReturnValue('fake-date')

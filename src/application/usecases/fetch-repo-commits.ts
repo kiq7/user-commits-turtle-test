@@ -1,4 +1,4 @@
-import { RepositoryStats, UsersDateCommit } from '../repositories/repository-info'
+import { RepositoryInfo, UsersDateCommit } from '../repositories/repository-info'
 
 interface Params {
   owner: string
@@ -8,7 +8,7 @@ interface Params {
 }
 
 export class FetchRepoCommits {
-  constructor (private readonly repositoryInfo: RepositoryStats) { }
+  constructor (private readonly repositoryInfo: RepositoryInfo) { }
 
   async execute (params: Params): Promise<UsersDateCommit[]> {
     const { owner, repo } = params
