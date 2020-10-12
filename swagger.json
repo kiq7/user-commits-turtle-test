@@ -1,0 +1,142 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+      "version": "1.0.0",
+      "title": "Repository API"
+  },
+  "tags": [{
+      "name": "Repository",
+      "description": "List user commits from repositories"
+  }],
+  "produces": [
+      "application/json"
+  ],
+  "paths": {
+      "/{owner}/{repo}/commits": {
+          "get": {
+              "tags": [
+                  "Repository"
+              ],
+              "summary": "Get commits count by user",
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/UserDateCommits"
+                      }
+                  },
+                  "404": {
+                      "description": "Repository not found"
+                  },
+                  "500": {
+                      "description": "Internal server error"
+                  }
+              },
+              "parameters": [{
+                      "name": "owner",
+                      "in": "path",
+                      "description": "Repository owner",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "name": "repo",
+                      "in": "path",
+                      "description": "Repository name",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "name": "since",
+                      "in": "query",
+                      "description": "Since date (YYYY-MM-DD format)",
+                      "required": false,
+                      "type": "string"
+                  },
+                  {
+                      "name": "until",
+                      "in": "query",
+                      "description": "Until date (YYYY-MM-DD format)",
+                      "required": false,
+                      "type": "string"
+                  }
+              ]
+          }
+      },
+      "/{owner}/{repo}/commits/details": {
+          "get": {
+              "tags": [
+                  "Repository"
+              ],
+              "summary": "Get commits messages from specific author and date",
+              "parameters": [{
+                      "name": "owner",
+                      "in": "path",
+                      "description": "Owner of repository",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "name": "repo",
+                      "in": "path",
+                      "description": "Name of repository",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "name": "author",
+                      "in": "query",
+                      "description": "Author",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "name": "date",
+                      "in": "query",
+                      "description": "Commits date (YYYY-MM-DD format)",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/Commit"
+                      }
+                  },
+                  "404": {
+                      "description": "Repository not found"
+                  },
+                  "500": {
+                      "description": "Internal server error"
+                  }
+              }
+          }
+      }
+  },
+  "definitions": {
+      "UserDateCommits": {
+          "type": "object",
+          "properties": {
+              "user": {
+                  "type": "string"
+              },
+              "commitsCount": {
+                  "type": "string"
+              }
+          }
+      },
+      "Commit": {
+          "type": "objct",
+          "properties": {
+              "user": {
+                  "type": "string"
+              },
+              "commitsCount": {
+                  "type": "string"
+              }
+          }
+      }
+  }
+}

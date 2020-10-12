@@ -1,5 +1,7 @@
 import express, { Application } from 'express'
 import { Routes } from './routes'
+import swaggerUi from 'swagger-ui-express'
+import * as swaggerDocument from '../../../swagger.json'
 
 export class Server {
   public express: Application
@@ -19,6 +21,7 @@ export class Server {
 
   private useRoutes (): void {
     this.express.use(this.routes.router)
+    this.express.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
   }
 
   public start () {
