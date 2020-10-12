@@ -94,7 +94,7 @@ npm run test
 └── package.json
 ```
 
-The architecture of the code developed was highly inspired by Clean Architecture and SOLID principles.
+The architecture of the code developed was highly inspired by Clean Architecture.
 Some of the concepts were applied in the project, such as the separation of responsibilities, layers, depending on abstractions, dependency injection, etc.
 The code is extremely scalable, for example, if we need to add a new provider (like GitLab or Bitbucket),
 it is not a difficult task, since the business rule depends on abstractions instead of implementations.
