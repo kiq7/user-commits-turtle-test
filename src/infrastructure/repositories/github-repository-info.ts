@@ -18,14 +18,14 @@ export class GitHubRepositoryInfo implements RepositoryInfo {
       const { data } = await this.gitHubClient.repos.listCommits({ owner, repo, since: sinceIso, until: untilIso })
       const commitsWithUserInfo = data.filter(data => data.author !== null)
 
-      const commitsDates = [...new Set(commitsWithUserInfo.map(({ commit }) => this.dateUtils.formatDateToLocale(commit.author.date)))].sort()
+      const commitsDates = [...new Set(commitsWithUserInfo.map(({ commit }) => this.dateUtils.formatDateString(commit.author.date)))].sort()
       const commitsAuthors = [...new Set(commitsWithUserInfo.map(({ author }) => author.login))]
 
       return commitsDates.map((date): UsersDateCommit => {
         const users = commitsAuthors.map(user => {
           const userCommits = commitsWithUserInfo
             .filter(({ author }) => author.login === user)
-            .filter(({ commit }) => this.dateUtils.formatDateToLocale(commit.author.date) === date)
+            .filter(({ commit }) => this.dateUtils.formatDateString(commit.author.date) === date)
 
           return {
             user,
@@ -46,8 +46,8 @@ export class GitHubRepositoryInfo implements RepositoryInfo {
 
   async getCommitsByUserAndDate (owner: string, repo: string, author: string, date: string): Promise<Commit[]> {
     try {
-      const since = new Date(date).toISOString()
-      const until = new Date(`${date} 23:59:59.999`).toISOString()
+      const since = this.dateUtils.formatDateToIso({ date })
+      const until = this.dateUtils.formatDateToIso({ date, formatEndDayTime: true })
 
       const { data } = await this.gitHubClient.repos.listCommits({ owner, repo, author, since, until })
 

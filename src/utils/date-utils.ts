@@ -8,11 +8,11 @@ export class DateUtils {
     const newDate = new Date(date)
 
     if (formatEndDayTime) {
-      newDate.setHours(23, 59, 59, 999)
+      newDate.setUTCHours(23, 59, 59, 999)
     }
 
     return newDate.toISOString()
   }
 
-  public formatDateToLocale = (date: string) => new Date(date).toLocaleDateString('en-US')
+  public formatDateString = (date: string) => new Date(date).toISOString().split('T')[0]
 }
