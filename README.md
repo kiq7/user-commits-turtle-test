@@ -31,6 +31,14 @@ npm install
 npm run start
 ```
 
+### Exploring the API
+
+If you wanna test any method exposed by the API, you should do it by using the Swagger interactive documentation. Just navigate to
+
+```
+http://localhost:3000/docs
+```
+
 
 ### Running the tests
 
