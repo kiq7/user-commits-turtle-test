@@ -9,9 +9,7 @@ interface Params {
 }
 
 interface Response {
-  commit: {
     message: string
-  }
 }
 
 export class FetchUserCommits {
@@ -30,9 +28,7 @@ export class FetchUserCommits {
     const commits = await this.repositoryInfo.getCommitsByUserAndDate(owner, repo, author, date)
 
     return commits.map(commit => ({
-      commit: {
-        message: commit.message
-      }
+      message: commit.message
     }))
   }
 }
